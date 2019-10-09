@@ -1,0 +1,176 @@
+public Tela1Activity extends AppCompatActivity{
+	private FragmentManager fm = getSupportFragmentManagaer();
+	private String[] stMenu = {"Cadastrar", "Editar", "Excluir"};
+	public static ArrayList<Contato> contatos = new ArrayList<Contato>();
+	private ListView lvMenu;
+
+	@Override
+	public void onCreate(Bundle savedInstances){
+
+		ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.simple_list_item_1, stMenu);
+		lvMenu.setAdapter(adapter);
+		
+		lvMenu.setOnItemClickListener(){
+		
+		FragementTransaction ft = fm.beginTransaction();
+		Bundle b = new Bundle();
+		Fragment frag;
+
+		switch (position){
+			case 0:
+				frag = CadastrarFragment();
+				ft.addToBackStack(null);
+				ft.replace(R.id.linear_conteudo, frag);
+				ft.commit():
+			break;
+
+			case 1:
+				frag = ListarFragment();
+				b.putInt("acao", 1);
+				frag.setArguments(b);
+				ft.addToBackStack(null);
+				ft.replace(R.id.linear_conteudo, frag);
+				ft.commit();
+			break;
+
+			case 2:
+				frag = ListarFragment();
+				b.putInt("acao", 2);
+				frag.setArguments(b);
+				ft.addToBackStack(null);
+				ft.replace(R.id.linear_conteudo, frag);
+				ft.commit();
+			break;
+		}
+
+
+public Contato implements Serializable{
+	private String nome;
+	private String email;
+	private String senha;
+	
+get e set
+}
+
+public CadastrarFragment extends Fragment {
+
+	private EditText etNome;
+	private EditText etEmail;
+	private EditText etSenha;
+	private Button btEnviar;
+
+	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle saved){
+		View v = inflater.inflate(R.layout.cadastrar_fragment, null);
+		etNome = v.findViewById(R.id.et_nome);
+		etEmail = v.findViewById(R.id.et_email);
+		etSenha = v.findViewById(R.id.et_senha);
+		btEnviar = v.findViewById(R.id.bt_enviar);
+
+		btEnviar.setOnClickListener(){
+
+			Contato contato = new Contato();
+			contato.setNome(etNome.getText().toString());
+			
+			Tela1Acitivity.contatos.add(contato);
+		}
+		limparEditTexts();
+
+	return v;
+}
+
+public ListarFragment extends Fragment {
+	private int position;
+	private Contato contato;
+	private ListView lvContatos;
+
+	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle b){
+		View v = inflater.inflate(R.layout.listar_fragment, null);
+		ArrayAdapter<Contato> adapter = new ArrayAdapter<Contato>(getContext(), android.R.simple_list_item_1, Tela1Activity.contatos);
+		lvContatos = v.findViewById(R.id.lv_contatos);
+		lvContatos.setAdapter(adapter);
+
+		lvContatos.setOnClickItemListener(){
+			int acao = getArguments().getInt("acao");
+			
+			if(acao == 1){
+				FragmentTransaction ft = getFragmentManager().beginTransaction();
+				Fragment frag = new EditarFragment();
+				Bundle b = new Bundle();
+				b.putSerializable("contato", Tela1Activity.contatos.get(position));
+				b.putInt("position", position);
+				frag.setArguments(b);
+				ft.replace(R.id.linear_conteudo, frag);
+				ft.commit();
+			}else if(acao == 2){
+				Tela1Activity.remove(position);
+				adapter.notifyDataSetChanged();
+			}
+		}
+
+	return v;
+
+}
+
+
+public EditarFragment extends Fragment{
+	private EditText etNome;
+	private EditText etEmail;	
+	private EditText etSenha;
+	private Button btEnviar;
+	private Contato contato;
+	private int position;
+
+	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle...{
+		View v = inflater.inflater(R.layout.fragment_cadastrar, null);
+		contato = (Contato) getArguments().getSerializable("contato");
+		position = getArguments().getInt("position");
+
+		etNome = v.findViewById(R.id.et_nome);
+		etEmail = v.findViewById(R.id.et_email);
+		etSenha = v.findViewById(R.id.et_senha);
+		btEnviar = v.findViewById(R.id.bt_enviar);
+
+		etNome.setText(contato.getNome());
+		etEmail.setText(contato.getEmail());
+		etSenha.setText(contato.getSenha));
+
+		btEnviar.setOnClickListener(){
+			contato.setNome(etNome.getText().toString());
+			contato.setEmail(etEmail.getText().toString());
+			contato.setSenha(etSenha.getText().toString());
+			
+			Tela1Activity.set(position, contato);
+		}
+
+		return v;
+	}
+	
+}
+
+root = quando passamos null estamos omitindo o root (pai) do elemento e suas propriedades serão sobrescritas;
+addToBackStack = usado pra quando deseja voltar no fragment anterior. o pararametro passado é o nome do backStack;
+commit = para salvar as alterações;
+bundle = essa classe é usada para salvar informações que não se perdem quando a view é destruída;
+fragmentManager = classe usada para criar transações para adicionar, remover o substituir fragments;
+ft.replace = usado para trocar o fragment a ser mostrado;
+
+Ciclo de vida;
+
+onAttach(); método que junta a activity com o fragment
+onCreate(); cria o fragment
+onCreateView();  usado para carregar o layout do fragment;
+onActivityCreated();
+onStart();
+onResume();
+	Fragment está funcionando
+onPause();
+onStop(); onStart(); onResume();
+onDestroyView(); após esse método o fragment não pode mais ser acessado; retorn para onCreateView() para o layout backStack
+onDestroy(); usado quando o fragment não está sendo usado;
+onDettach(); usada quando o fragment não está ligado a nenhuma activity;
