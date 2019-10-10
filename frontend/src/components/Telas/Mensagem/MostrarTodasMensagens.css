@@ -1,0 +1,168 @@
+.mensagens{
+    margin-top: 100px;
+    margin-left: 280px;
+}
+body{
+    background: rgb(243, 247, 247);
+}
+@keyframes sumir {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.inp{
+    width: 100px;
+}
+
+.inputs{
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    margin-left: 264px;
+}
+.sucesso{
+    width: 200px;
+    height: 40px;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 80px;
+    background: rgb(3, 3, 3);
+    color: white;
+    font-size: 14pt;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    animation: sumir 2s linear 1;
+}
+
+.Home--header{
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    position: fixed;
+    height: 50px;
+    z-index: 1;
+    background: #313131;
+    color: white;
+    border-bottom: 1px solid #5f5e5e;
+}
+
+.sair{
+    font-size: 16pt;
+    margin-top: 4px;
+    width: 10px;
+    margin-right: 50px;
+    cursor: pointer;
+}
+
+.barra{
+    margin-right: 15px;
+}
+.Home--username{
+    width: 200px;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 18pt;
+    margin-right: 15px;
+}
+
+.Home--button{
+    height: 40px;
+    color: black;
+    background: white;
+    cursor: pointer;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.user{
+    cursor: pointer;
+}
+.pagina{
+    color: white;
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;  
+}
+.page{
+    margin-top: 50px;
+    margin-right: -280px;
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    background: #313131;
+    position: fixed;
+    width: 100%;
+}
+.navBar{
+    color: white;
+    margin-top: 50px;
+    width: 280px;
+    height: 100vh;
+    position: fixed;
+    background: #313131;
+    z-index: 1;
+    border-right: 1px solid #5f5e5e;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar--buttons{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.Home--link{
+    color: white;
+    cursor: pointer;
+}
+
+.Home{
+    display: flex;
+    background: rgb(243, 247, 247);
+}
+
+.Home--content{
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.anterior{
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 4px;
+    -webkit-transform: rotate(180deg);
+}
+
+.desativado{
+    color: rgb(131, 130, 130);
+}
+
+.ativado{
+    cursor: pointer;
+}
+
+.botoes{
+    font-size: 20pt;
+    display: flex;
+    flex-direction: row;
+    margin-right: 25px;
+}
